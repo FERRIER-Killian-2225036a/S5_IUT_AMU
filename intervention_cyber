@@ -1,0 +1,112 @@
+01/10/24
+1 per /4 connait les actifs num
+Julien SIRTAINE Consultant formateur blockchain et  actifs num + fonda JSECapital
+PSAN MIKA
+Blockchain :
+blockchain crypto graphique 40 ans adapté
+1ere loi blockchain 2017
+= base de donné qui est partager simultanément + distribué + tout le monde peut lire et écrire
+Résumé : livre pas effacable, pas destrictible mais lisible par tout le monde et tout le monde peut écrire
+
+Titre incrémental
+entête avec timestamp
+hash du block précédent
+ensemble des transactions écrite
+concensus = preuve des transactions sont correct, qui est le validateur que toutes les transac sont correct; contient IP du mineur 
+empreinte num (hash du block)
+
+blockchain non censurable, non modifiable et controlable par un tier
+meme en possesion d'un serveur, si on change, les autres serveurs, vérificateur vont le rejeter du réseau
+résilience, intégrité et décentralisation
+Peut se stopper mais jamais s'arreter -> pas la blockchain qui ne fonctionne pas
+Résilience : elle possède pas de point de défaillance unique
+intégrité : 2 actions possible : lecture, écriture
+Décentralisé : distribué entre tous les participants du réseau
+
+2 types :
+Public : 95% des cas; en ligne; personne la possède; n'importe qui peut la stocker; acteurs inconnu
+Privé : entité possède blockchain; stocké sur des serveurs internes; acteurs connu; besoin d'auth
+
+POC eur num sur privé 
+Stable coin Public
+
+Consensus :
+Proof of Stake = validé des blocks : vote basé sur le rapport solde/quantité de monaie sur le réseau
+Proof of work = mineur réseau calcul mathématique et le premier a le faire gagne : compétition pour trouver un hash aléatoire en premier
+
+Etape :
+Création -> Compilation avec les autres blocks (main pool) -> Compétition Vote (mineur) -> Valide d'etre le premier a avoir trouver la valeur de minage -> valeur ajouté a la plus grande chaine
+
+Transparence des transactions (blockchain publ) pseudonymat car chacune des adresses expéditrices et destinatrice est visible.
+
+chainanalysis scorechain peut savoir qui est derière l'adresse 
+
+Bitcoin Janvier 2009 : satoshi nakamoto; mtn 15000 - 200000 noeuds = 1 IP 
+Bitcoin = réseau
+bitcoin = actif 
+Plus grande farme au cansas
+
+Blockchain sur un satélite donc X réseau : encore sur le satélite
+
+antminer = mineur 
+
+aspect systémique = ex. courant dans un village
+
+21.000.000 nb total de Bitcoin minés d'ici 2136
+
+Microstatégie = 1er dans cryptomonaie
+
+Trilemme de la blockchain : Sécurité; Scalabilité; Décentralisé
+6 blocks pour que la transaction soit imuable
+Blockchain lente -> c'est pour ca qu'on peut pas payer son pain avec
+
+smartcontract = pas un contrat; modalité d'exec sur laquelle les parties se sont mises d'accord; c'est du code/algoritmie; exec auto quand certaine conditions sont rempli ou certains évènements; spec a la blockchain
+
+Ethereum : 2015
+
+AXA test des choses dans la blockchain 
+
+Risques et pertes
+ensemble actifs represente 2,1T€ 
+Or 8x plus que bitcoin
+14600 actifs num différents recensé par coinGeko
+
+2.900.00.00$ "hacké" 2012-2022 
+72% finances décentralisé "hacké" 2021
+Gens = point of failure par des influenceurs
+
+Fr et Eu :
+Loi PACTE et régime pilote 
+Reglement MIKA application 1er Janvier 2025
+Loi SRNE 
+
+WEB1.0 -> information digitale; lecture; page statique; netscape
+WEB2.0 -> comerce digitale; lecture et ecriture; réseaux sociaux, site web; GAFAM 
+WEB3.0 -> Lecture, écriture, posséder; Bitcoin, actifs num, metaverse; binance, Opensea
+-> prop utilisateurs pour Création contenu, techno blockchain, utilisateur interconnecté
+-> défaire pb du WEB2, transféré GAFAM aux utilisateurs (droit a l'oublie : blockchain le permet pas)
+-> 4 freins : 
+  Conformité, régulation, incertitude juridique
+  Scalabilité et montée en charge
+  Complexité et sécu technique
+  Comptétitivité éco vis a vis des systèmes centralisé
+Scandale LUNA et FTX
+
+Fongible représente actifs interchangeable sans distinction d'un jeton a l'autre 
+NFT = actif numérique unique
+Lien de l'image dans IPFS (blockchain) 
+
+Marques s'intéresse blockchain pour se modernisé, attirer du monde ect 
+Banque Delubac et Cie = seule banque en france qui permet d'acheter des cryptomonaie
+SG Forge = première qui tokénise 
+
+Tokenomic = token + économique = allocation des tokens + distrib + valeur de sécu 
+-> Circulating suply + total suply + max suply
+
+CEX = Centralized exchange
+
+ICO = initial coin offering = introduction en bourse = offre public de jeton 
+pre save; pre ICO = réservé le ICO en avance
+-10% ICO qui ont tenu 
+
+Regelementation : visa virifié par AMF

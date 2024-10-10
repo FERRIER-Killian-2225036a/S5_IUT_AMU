@@ -1,0 +1,58 @@
+02/10/2024
+elmouelhia.free.fr 
+Cours sur les services web, spingboot et java
+
+Java : LOO
+
+Classes par défaut sont en package
+
+Création java: SunMicrosystems 1996 -> ORACLE 2009
+
+Interface contient que des méthodes
+
+Maven = gestionnaire de paquets/dépendences pour java (ex. PiP pour python) :
+Java = LOO | JDBC = Java Database Connectivity (driver)(.jar) | MySQL = Language relationnel
+
+.jar = java archive
+A.jar B.jar = packages 
+
+Maven utilise des pom.xml
+
+HTTP(Roy Fielding, )
+Architecture Client/Serveur
+Requête/reponse HTTP contient entête = headers et coprs = body (le body peut être vide)
+
+Dans ENTETE en REQUEST HTTP verbes/methodes = GET (recupere les données) POST (ajouter des données) PUT (modifier des données) DELETE (supprimer)
+Dans ENTETE en RESPONSE HTTP status code = 200, 404, etc | commence par : 2XX -> tout va bien; 3XX -> Redirection/Plusieurs options; 4XX -> erreur client; 5XX -> serveur
+
+Navigateur comprend HTML CSS JS SVG et XML 
+
+Dans un MVC = design parttern : requete HTTP -> controller -> model -> view -> controller -> reponse MVC 
+Disign pattern archtectural et application
+
+Services web:
+SOAP : protocole d'échange mais trop de XML; mode dans les années 90
+REST : Roy; que HTTP 
+GraphQL
+ect 
+
+Services web REST en java : 
+Lib JaxRS (java natif)
+Spring (framework java) X ORACLE :
+  Spring REST 
+  Spring data REST 
+
+Spring framework :
+  Spring web
+  Spring JDBC 
+  Spring data : Spring data JPA (relationnel), Sping mangoDB 
+  Spring Securité
+  Sping batch
+
+2 types de BD :
+  Relationnel (ORACLE, MySQL): utilisent SQL (structured query language)
+  NoSQL, Not Only SQL : non structuré 
+    orienté document : mangoDB 
+    KeyValue
+    Graph 
+  

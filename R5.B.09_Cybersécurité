@@ -1,0 +1,110 @@
+02/10/2024
+I. Mitre Att&ck framwork
+  hight level -> accès donnée entreprise interne
+  Tactics(quelle attaque) Techniques(comment faire l'attaque) Procedure(détails)
+  1. reconnaissance 2. Initial access 3. Credentials access 4. privilege escalation 5. extraction 6. impact
+  THM : Basic pentesting
+
+  1. Initial access 
+    THM : Phishing email in action - OK + XSS + SQL injection + SQL injection lab + advanced SQL injection
+
+  Identity and Access managment : identification = qui vous êtes; authentification = ; Autorisation = sys vérifie que vous avez accès; journalisation des actions
+  DAC = Discret Access Control + RBAC + MAC = controle d'accès 
+  One Time Password = jeton a usage unique; Hardware One Time Password; Timebase One Time Password
+  U2F = facteur d'auth universelle (yubikey)
+  Single-Sign On = connection unique
+  THM : Identity and Access Managment; Intro to cryptOps; Introduction to Cryptography
+
+Panorama des attaquants :
+  Cyberdélinquence
+  Script Kiddies
+  Etats et groupes paraétatique (gouv gagnera toujours)
+  Concurents
+  Malveillance interne
+  Hacktiviste
+  Erreurs, négligences
+
+Defense périmetrique :
+  permet d'isoler le systeme de l'exterieur
+  Firewall : 
+    physique = machine qui sépare 2 systèmes
+      Stateless = autorisation que des ports dont on a besoin
+      Statefull = prend en compte les connexions en cours
+    logiciels = iptables
+DMZ = zone démilitarisé : segmentation du réseau (buffer) 
+  comprend les machines interne + externe 
+  Comprend external firewall et internal firewall pour cloisonner la DMZ 
+WAF = firewall mais s'applique que la couche 7 d'OSI
+  X injection
+  Monitoring + surveillance
+IDS/IPS :
+  sonde d'analyse réseau (ex. SNORT, SURICATA, OSSEC)
+  NIDS = network : attention faux positifs pour pas bloquer des actions légitimes
+  HIDS = Hostbased
+Mail :
+  SpamAssasin = filtrage des spams; donne un score pour les mails suspicieux
+  ClamAV = antivirus
+
+Defense en profondeur :
+  VRF = Virtual routing and forwarding : isolement a plus bas niveau
+    routeurs virtuels sur un routeur physique pour segmenter deux réseaux 
+    Utiliser dans les datacenter
+    Attaque possible: jump de VRF 
+  Antivirus : logiciel de detection de menace | protection a base de signatures
+  EDR : antivirus mais fait de l'analyse comportemental; reponse proactive -> IPS
+    Endpoint detection and response
+  XDR peut se propager sur plus de device
+  Malware : packer (embalage du malware) pour compiler et falsifier le contenue 
+    Yara émet signatures types
+    Les malware s'activent en différé et rend le travail de reverse ingeneiring difficile
+    De plus en plus intelligent
+  VPM = Vulnerability and Patch Managment :
+    Scan de PC, voir vuln, remédier, vérification maj
+    OpenVAS
+  Durcissement (hardening) : renforcement systeme (less privilege)
+  NAC = network access control :
+    Controller l'acces au réseau 
+    Vérification de conformité = vérification que l'appareil est légitime et pas différents des autres appareils afin de 
+    controller les acces
+    802.1X :
+      Protol EAP(extended auth protocol)/MAB(MAC @ bypass) pour la connection des devices au wired access switches ou wireless LAN controller
+      Connection par un radius sur un ISE(qui peut servir de Firewall). Peut changer de VLAN et après connection AD par exemple par LDAP
+  Chiffrement des données :
+    En transit : TLS
+    Au repos : VeraCrypt, Luks
+
+  Interception SSL pour resigner les transit web pour le routeur 
+  ISPT = internet sur postes de travail 
+
+Least privilege :
+  Recréer un compte admin pour par qu'il est l'ID 1 
+  Control d'habilitation pour éviter d'avoir des cibles d'attaques 
+SPOC = single point of control (pas un seul qui a les clés du royaume)
+Security by design :
+  Requirements -> design -> code -> install -> test -> production
+
+KISS = Keep It Simple Stupid
+
+Defense par l'obscurité : pas forcement cacher comment on sécurise car on peut facilement le contourner
+
+
+
+
+
+SonarQube : verif code
+
+THM : 
+  - Intro to pipeline automation
+  - CI/CD and Build secu 
+  - DAST
+  - SAST
+  - Firewall
+
+RUMPS :
+  Comment passer d'un membre des GAFAM à une solution Open Source et éthique 
+  Alternantives :
+    - Infomaniak
+    - CTemplar
+    - Tutanota
+    - Proton
+    - Nextcloud
