@@ -9,7 +9,7 @@ I. Mitre Att&ck framwork
     THM : Phishing email in action - OK + XSS + SQL injection + SQL injection lab + advanced SQL injection
 
   Identity and Access managment : identification = qui vous êtes; authentification = ; Autorisation = sys vérifie que vous avez accès; journalisation des actions
-  DAC = Discret Access Control + RBAC + MAC = controle d'accès 
+  DAC = Discret Access Control + RBAC + MAC (mandatory access control) = controle d'accès 
   One Time Password = jeton a usage unique; Hardware One Time Password; Timebase One Time Password
   U2F = facteur d'auth universelle (yubikey)
   Single-Sign On = connection unique
@@ -88,9 +88,6 @@ KISS = Keep It Simple Stupid
 Defense par l'obscurité : pas forcement cacher comment on sécurise car on peut facilement le contourner
 
 
-
-
-
 SonarQube : verif code
 
 THM : 
@@ -108,3 +105,39 @@ RUMPS :
     - Tutanota
     - Proton
     - Nextcloud
+
+16/10/2024
+Mettre en place des PSSI (gestionnaire de mdp)
+
+LUKS => par défaut AES 
+KDF = key derivation function
+
+parfeu logiciel = netfilters :
+iptables (old)
+nftables (new)
+ufw -> configuration iptables par défaut (Conseillé)
+Docker bypass iptables -> modifier config docker ou redirection ip 
+SSH:
+  Par def : changer port ssh => empeche les robots mais déplace de pb 
+            mettre un port haut car moins scanné
+            enlever la connexion root 
+            Utiliser des clés
+
+SELinux/AppArmor : module de sec pour renforcer control access noyau
+  |-> www-data n'a access qu'a /var/www 
+  --> ou sort une alerte 
+mode permisive/enforcing : ascenseur s'ouvre quand pb ou se ferme dans tous les cas
+
+Lynis : outil audit de secu 
+  liste les règles qu'on peut mettre en place sur notre système 
+  embarque tous les moyen de renforcer le systeme
+  lien de la doc pour mettre en place la règle 
+Dive : inspection image docker
+THM: Linux Systeme Hardening, hardening basics P1 + P2, Container hardening, microsoft windows hardening
+
+Vie privé : 
+  Définir son threat model
+  Sur 3 zones
+
+SIEM : Security information and event managment
+  collecte logs + analyse + corrélation d evenements
