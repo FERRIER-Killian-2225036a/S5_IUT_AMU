@@ -56,3 +56,131 @@ Spring framework :
     KeyValue
     Graph 
   
+
+# Services complexes
+
+entité : class qui représente une table de bdd : rajouter @entity
+
+@id : spécifier la clé primaire
+
+@generatedValue 
+
+extends JpaRepository<entity, type clé primaire>
+
+controller ⇒ service ⇒ repos ⇒ bdd
+
+repos est le seul à communiquer avec la BDD
+
+autowired au dessus d’une interface
+
+IOC : Inversion of Control 
+
+DAO : Data Access Object
+
+DAL : Data Access Layer
+
+Class en Pascalcase
+
+Object en camelCase
+
+LDD : Langage de Définition de Données
+
+LCD : Langage de Création de Données
+
+LMD : Langage de Manipulation de Données
+
+LCT : Langage de Création de Données
+
+Spring cherche une classe à partir d’une interface.
+Si il en trouve une, il renvoie une instance de la classe.
+Si il en trouve plusieurs, on doit lui en spécifier une (qualifier).
+Si il n’en trouve pas, il renvoie une erreur.
+
+Injection de dépendances dans spring boot :
+
+Autowired est une fonctionnalité de spring framework qui permet d’injecter de manière automatique des dépendances dans une classe.
+
+- @Component est une stéréotype générique pour n’importe quel composant ou bean géré par Spring.
+- @Repository est un stéréotype pour la couche de persistance.
+- @Service est un stéréotype pour la couche de service.
+- @Controller est un stéréotype pour la couche de présentation (spring-MVC)
+- @Entity
+- @ComponentScan
+- @ComponentScan
+- @Override : héritage
+- @Qualifier : spécifier la classe à utiliser pour @autowire
+
+Spring Boot permet de faciliter la création de projets à partir de starters.
+
+Starter : ensemble de dépendances maven compatibles
+
+CRUD : 5 méthodes
+
+Create : POST
+
+Read : GET (general et byId)
+
+Update : PUT
+
+Delete : DELETE
+
+Les actions sont des méthodes HTTP.
+
+Sérialisation : transformer des objets en format JSON
+
+Désérialisation : transformer des instances JSON en objets
+
+REST : il faut mettre les routes au pluriel
+
+Repos communique avec la BDD ?
+
+Spring core :
+
+IOC by ID
+
+AOP : Programmation Orientée Aspect
+
+ORM : Object Relation Mapping
+
+Hibernate est un ORM
+
+Hibernate est open source et développé par JBOSS
+
+BDD en Java :
+
+Spring JDBC (Java DataBase Connectivity) : requêtes SQL à la main
+
+Spring Data JPA (Jakarta Persistent API) : pas de requêtes SQL
+
+Entité : class qui représente une table de bdd
+
+@id : spécifier la clé primaire
+
+@generatedValue 
+
+lombok : librairie java permettant d’éviter d’écrire des méthodes redondantes telles que les setteurs et getteurs.
+
+2 solutions pour authentification BDD :
+
+In memory
+
+In database
+
+Faille CSRF : prendre identité de quelqu’un d’autre, dans le web ?
+Possible de désactiver sous spring
+
+filtre avant le controler
+
+requête ⇒ filtre ⇒ controller
+
+autorisation : 
+
+2 manières :
+
+security config
+
+annotation sur les méthpdes du controller @secured  @hasRole
+
+validation de dopnnées : éviter d’envoyer des données vides et de surcharger des bdd avec un script
+
+HATEOS : se renseigner dessus
