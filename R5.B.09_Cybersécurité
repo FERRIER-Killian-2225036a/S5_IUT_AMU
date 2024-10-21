@@ -6,7 +6,7 @@ I. Mitre Att&ck framwork
   THM : Basic pentesting
 
   1. Initial access 
-    THM : Phishing email in action - OK + XSS + SQL injection + SQL injection lab + advanced SQL injection
+    THM : Phishing email in action - OK + XSS - OK + SQL injection + SQL injection lab + advanced SQL injection
 
   Identity and Access managment : identification = qui vous êtes; authentification = ; Autorisation = sys vérifie que vous avez accès; journalisation des actions
   DAC = Discret Access Control + RBAC + MAC (mandatory access control) = controle d'accès 
