@@ -1,142 +1,128 @@
-#include <functional>
 #include <iostream>
-#include <mutex>
-#include <ostream>
 #include <thread>
+#include <semaphore>
+#include <mutex>
 #include <vector>
+#include <chrono>
 
-std::mutex mut;
+// Définition des constantes et variables:
+const int capacity = 5; // capacité de l'ascenseur
+int passengersNumber = 12; // nombre de passagers dans l'attente au floor 0
+int actualPassengerNumber = 0; // nombre de passagers dans l'ascenseur
+int passengersUnloaded = 0; // nombre de passagers sortant au floor 1
 
-void Question1() {
-    // Question 1.1 :
-    unsigned int n = std::thread::hardware_concurrency();
-    std::cout << n << std::endl;
+// Définitions des mutex :
+std::mutex counter;
 
-    // Question 1.2 :
-    // Pour savoir combien de task on peut lancer en simultaner avec les thread
+// Définitions des sémaphores :
+std::counting_semaphore<capacity> loadPassenger(capacity); // Sémaphore pour gérer la montée des passagers
+std::binary_semaphore unloadPassenger(0); // Signaler à un passager qu'il peut descendre
+std::binary_semaphore signalDeparture(0); // Signaler à l'ascenseur qu'il peut monter/descendre
 
-    // Question 1.3 :
-    // J'ai 12 coeurs
+// Cas d'utilisation : Permettre à un passager de monter dans l'ascenseur
+void board(int id){
+    // Bloquer le mutex pour incrémenter le nombre de passagers dans l'ascenseur
+    std::lock_guard<std::mutex> lock(counter);
+    actualPassengerNumber++;
+    std::cout << "Passenger " << id << " is boarding" << std::endl;
 }
 
-void fctQ1() {
-    std::cout << "Hello world" << std::endl;
-    std::cout << "Bonjour" << std::flush;
-    std::cout << " tout" << std::flush << " le monde" << std::endl;
+// Cas d'utilisation : Permettre à un passager de descendre de l'ascenseur
+void unboard(int id){
+    // Bloquer le mutex pour :
+    // décrémenter le nombre de passagers dans l'ascenseur
+    // décrémenter le nombre de personnes attendant au floor 0
+    // incrémenter le nombre de personnes descendues au floor1 durant le trajet en cours
+    std::lock_guard<std::mutex> lock(counter);
+    actualPassengerNumber--;
+    passengersNumber--;
+    passengersUnloaded++;
+    std::cout << "Passenger " << id << " is unboarding" << std::endl;
 }
 
-void Question2() {
-    std::thread th1(fctQ1);
-    std::thread th2(fctQ1);
-
-    // Question 2.1 :
-    // Car la fonction ne se termine pas et n'attend pas que l'autre est fini pour la commencer
-
-    // Question 2.2 :
-    // Attend la fin du thread pour terminer la main
-    th1.join();
-    th2.join();
-}
-
-void fctQ3(int i) {
-    mut.lock();
-    std::cout << "-----------------------------" << std::endl;
-    std::cout << "Thread n°" << i << std::endl;
-    std::cout << "Thread ID : " << std::this_thread::get_id() << std::endl;
-    std::cout << "Bonjour" << std::flush;
-    std::cout << " tout" << std::flush << " le monde" << std::endl;
-    std::cout << "-----------------------------" << std::endl;
-    mut.unlock();
-}
-
-void Question3() {
-    std::thread th1(fctQ3, 1);
-    std::thread th2(fctQ3, 2);
-    th1.join();
-    th2.join();
-    // Des fois c'est le thread 1 qui va afficher en premier et des fois c'est le tread 2
-}
-
-void Question4() {
-    std::thread th1(fctQ3, 1);
-    std::thread th2(fctQ3, 2);
-    th1.join();
-    th2.join();
-    std::cout << "Thread 1 ID : " << th1.get_id() << std::endl;
-    std::cout << "Thread 2 ID : " << th2.get_id() << std::endl;
-    // Question 4.2 :
-    // Il affiche l'erreur "thread::id of a non-executing thread"
-}
-
-void fctQ5(int i) {
-    std::lock_guard<typename std::mutex> lock(mut);
-    std::cout << "-----------------------------" << std::endl;
-    std::cout << "Thread n°" << i << std::endl;
-    std::cout << "Thread ID : " << std::this_thread::get_id() << std::endl;
-    std::cout << "Bonjour" << std::flush;
-    std::cout << " tout" << std::flush << " le monde" << std::endl;
-    std::cout << "-----------------------------" << std::endl;
-    //mut.unlock();
-}
-
-void Question5() {
-    std::thread th1(fctQ5, 1);
-    std::thread th2(fctQ5, 2);
-    th1.join();
-    th2.join();
-}
-
-unsigned i(0);
-void inc() {
-    std::lock_guard<typename std::mutex> lock(mut);
-    ++i;
-    std::cout << i << std::endl;
-}
-
-void Question6() {
-    std::thread th1(inc);
-    std::thread th2(inc);
-    std::thread th3(inc);
-    th1.join();
-    th2.join();
-    th3.join();
-    // Question 6.1 :
-    // On constate que la console affiche 1,3,2 ou 1,2,3
-}
-
-void Question6_2() { // Réponse a la question 7.2 aussi
-    const int num_threads = 2000;
-    std::vector<std::thread> threads;
-    for (int i = 0; i < num_threads; ++i) {
-        threads.push_back(std::thread(inc));
+// Cas d'utilisation : Permettre à l'ascenseur d'attendre qu'il soit rempli ou qu'il ne reste plus de passagers
+void load(){
+    while(true){
+        std::lock_guard<std::mutex> lock(counter);
+        // Si la capacité est atteinte, ou si tous les passagers restants au floor 0 sont dans l'ascenseur
+        if (actualPassengerNumber == capacity || actualPassengerNumber == passengersNumber) {
+            signalDeparture.release(); // L'ascenseur peut démarrer
+            return;
+        }
     }
-    for (auto& th : threads) {
-        th.join();
+}
+
+// Cas d'utilisation : Simuler le mouvement de l'ascenseur
+void run(){
+    std::cout << std::endl << "Elevator is running..." << std::endl;
+    signalDeparture.acquire(); // L'ascenseur ne peut plus démarrer
+}
+
+// Cas d'utilisation : Libérer les passagers
+void unload(){
+    std::cout << "Floor 1" << std::endl << std::endl;
+    // Nombre de passagers à décharger
+    // min() prend le plus petit entre les paramètres
+    int passengersToUnload = std::min(capacity, actualPassengerNumber); 
+    for (int i = 0; i < passengersToUnload; ++i) {
+        unloadPassenger.release();  // Autoriser les passagers à descendre
     }
-    std::cout << "Valeur finale du compteur: " << i << std::endl;
+
+    bool allUnloaded = false;
+    // tant qu'il reste des passagers dans l'ascenseur
+    while (!allUnloaded) {
+        {
+            std::lock_guard<std::mutex> lock(counter);
+            // Tous les passagers montés ont été déchargés
+            if (passengersUnloaded == passengersToUnload) {
+                allUnloaded = true;  // Tous les passagers sont déchargés
+                passengersUnloaded = 0; // Réinitialiser le nombre de passagers sortis
+                actualPassengerNumber = 0; // Réinitialiser le nombre de passagers dans l'ascenseur
+                signalDeparture.release(); // Autoriser l'ascenseur à redescendre
+            }
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(100)); // Petit délai pour éviter une boucle rapide
+    }
 }
 
-void inc7(unsigned & i) {
-    std::lock_guard<typename std::mutex> lock(mut);
-    ++i;
-    std::cout << "i = " << i << std::endl;
+// Cas d'utilisation : Cycle de vie d'un passager
+void passenger(int id){
+    loadPassenger.acquire(); // Attendre que l'ascenseur soit prêt
+    board(id);  // Monter dans l'ascenseur
+    unloadPassenger.acquire(); // Attendre pour descendre
+    unboard(id);  // Descendre de l'ascenseur
 }
 
-void Question7() {
-    unsigned i (0);
-    std::thread th1 (inc7, std::ref(i));
-    std::thread th2 (inc7, std::ref(i));
-    std::thread th3 (inc7, std::ref(i));
-    th1.join();
-    th2.join();
-    th3.join();
+// Cas d'utilisation : Cycle de vie de l'ascenseur
+void elevator(){
+    while(passengersNumber > 0){
+        load();   // Charger les passagers
+        run();    // Monter à l'étage 1
+        unload(); // Décharger les passagers
+        run();    // Redescendre à l'étage 0
+        std::cout << "Floor 0" << std::endl << std::endl;
 
-    // Question 7.1 :
-    // On constante que le résultat des deux thread est 2
-    // Pour quatre thread le résultat sera 3 pour 2 thread et 2 pour le dernier ou 3 pour tous
+        // Calculer le nombre de passagers restants à charger
+        int remainingPassengers = std::min(capacity, passengersNumber);
+        loadPassenger.release(remainingPassengers); // Libérer les places pour le prochain groupe
+    }
 }
 
-int main() {
-    Question7();
+int main(){
+
+    // Initialisation de l'ascenseur :
+    std::thread elevatorThread(elevator);
+
+    // Initialisation des passagers :
+    std::vector<std::thread> passengersThread;
+    for(int i = 0; i < passengersNumber; ++i){
+        passengersThread.emplace_back(passenger, i + 1);
+    }
+
+    elevatorThread.join();
+    for(auto& passenger : passengersThread){
+        passenger.join();
+    }
+
     return 0;
 }
