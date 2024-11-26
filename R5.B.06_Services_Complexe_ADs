@@ -1,0 +1,30 @@
+2024-11-26
+
+Gestion d'un park informatique depuis un seul PC
+Vu sur tout ce qui se passe + mise en place des politiques
+
+Park informatique = imprimantes, serveurs, PC
+
+AD (Active Directory) = payant et dans + de 90% des entreprises
+Simplification de la vie des admin
+Gestion des droits d'accès
+Contrôle centralisé grâce à la fontionnalité de stratégie de groupes AD (GPO) 
+Permet le SSO
+
+Vrai nom : Active Directory Domain Services
+Fourni auth (unification : tous les devices doivent avoir des mdp à 14 carac) et author
+Stocké sous forme d'objets
+indentifier les obj sur le réseau (annuaire)
+
+Basé sur techno LDAP
+
+Contenance :
+Devices, utilisateurs et leurs droits, services (smtp,...)
+
+3 fonctions : annuaire (indentification) + auth + author
++ Gestion users, services de domaine (recherche info) + stratégie de groupe (GPO) = politiques
+
+LDAP : stokage hiérarchique, sécurisé et très rapide
+1 LDAP par AD
+multimaître = open en w et r sur plusieurs serveurs
+BD Jet = fichier bd et les modif et ajout sont stocké dans un fichier en attendant leur execution
